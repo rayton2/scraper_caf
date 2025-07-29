@@ -7,6 +7,11 @@ class SeleniumScraper:
         from selenium import webdriver
         from selenium.webdriver.chrome.service import Service
         from webdriver_manager.chrome import ChromeDriverManager
+        from selenium.webdriver.support.ui import WebDriverWait
+        from selenium.webdriver.support import expected_conditions as EC
+        from selenium.webdriver.common.by import By
+        from selenium.webdriver.support.ui import WebDriverWait
+        from selenium.webdriver.support import expected_conditions as EC
 
         options = webdriver.ChromeOptions()
         options.add_argument('--headless')  # Run in headless mode
@@ -18,8 +23,12 @@ class SeleniumScraper:
     def fetch_data(self):
         self.driver.get(self.url)
         # Implement the logic to scrape the table data here
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.TAG_NAME, "table"))
+        )
         # Example: Locate the table and extract data
         table_data = []
+        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "table")))
         table = self.driver.find_element("xpath", "//table")  # Adjust the XPath as needed
         rows = table.find_elements("tag name", "tr")
         
