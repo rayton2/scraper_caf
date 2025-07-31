@@ -1,7 +1,14 @@
 # File: /webscraping-selenium/webscraping-selenium/src/main.py
+# pyright: ignore[reportMissingImports]
 
 from scraper.selenium_scraper import SeleniumScraper
 from utils.excel_writer import write_to_excel
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 def main():
     url = 'https://caf.mda.gov.br/consulta-publica/ufpa'
@@ -19,7 +26,8 @@ def main():
         print(f"[ERRO] Falha ao extrair ou salvar dados: {e}")
     finally:
         # Fecha o driver do Selenium
-        scraper.close_driver()
+        print("Encerrado")
+#        scraper.close_driver()
 
 if __name__ == "__main__":
     main()
